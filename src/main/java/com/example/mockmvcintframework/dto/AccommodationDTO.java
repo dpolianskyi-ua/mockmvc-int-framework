@@ -22,5 +22,5 @@ public class AccommodationDTO {
     @JsonProperty("accommodationDate")
     LocalDate accommodationDate;
     @JsonProperty("isSingleOwned")
-    boolean isSingleOwned;
+    Boolean isSingleOwned;
 }

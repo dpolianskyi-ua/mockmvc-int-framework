@@ -18,12 +18,12 @@ public class StringResourceParameterResolver implements ParameterResolver {
     @Override
     @SneakyThrows
     public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
-        var resourcePath = parameterContext.findAnnotation(StringResource.class)
+        var resourcePath = parameterContext
+                .findAnnotation(StringResource.class)
                 .map(StringResource::value)
                 .orElseThrow();
 
-        @Cleanup
-        var inputStream = getClass().getClassLoader().getResourceAsStream(resourcePath);
+        @Cleanup var inputStream = getClass().getClassLoader().getResourceAsStream(resourcePath);
 
         return new String(inputStream.readAllBytes(), UTF_8);
     }

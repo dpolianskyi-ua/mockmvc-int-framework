@@ -22,8 +22,10 @@ class GreetingControllerIntegrationTest extends MockMvcTestBase {
     }
 
     @Test
-    void greeting_whenRequestParamIsProvided_returnsCustomResponse(@StringResource("mock/custom-greet.json") String expected) {
-        var request = MvcRequest.builder().httpGet("/api/greeting")
+    void greeting_whenRequestParamIsProvided_returnsCustomResponse(
+            @StringResource("mock/custom-greet.json") String expected) {
+        var request = MvcRequest.builder()
+                .httpGet("/api/greeting")
                 .parameters(Parameters.builder().add("name", "Custom User").build())
                 .build();
 

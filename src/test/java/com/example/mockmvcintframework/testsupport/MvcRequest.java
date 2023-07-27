@@ -10,7 +10,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import static java.util.Collections.singletonList;
-import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
@@ -23,7 +23,7 @@ public class MvcRequest {
     private String path;
     @Builder.Default
     private MediaType contentType = APPLICATION_JSON;
-    private String content;
+    private Object content;
     private Headers headers;
     private Parameters parameters;
 
@@ -43,7 +43,19 @@ public class MvcRequest {
             return method(GET).path(path);
         }
 
-        public MvcRequest withPrintedResult() {
+        public MvcRequestBuilder httpPost(String path, Object payload) {
+            return method(POST).path(path).content(payload);
+        }
+
+        public MvcRequestBuilder httpPut(String path, Object payload) {
+            return method(PUT).path(path).content(payload);
+        }
+
+        public MvcRequestBuilder httpDelete(String path) {
+            return method(DELETE).path(path);
+        }
+
+        public MvcRequest buildAndPrint() {
             return isResultPrinted(true).build();
         }
     }

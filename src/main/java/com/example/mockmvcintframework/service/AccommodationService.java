@@ -33,4 +33,8 @@ public class AccommodationService {
     public void delete(Long id) {
         repository.delete(id);
     }
+
+    public void deleteAll() {
+        repository.deleteAll();
+    }
 }

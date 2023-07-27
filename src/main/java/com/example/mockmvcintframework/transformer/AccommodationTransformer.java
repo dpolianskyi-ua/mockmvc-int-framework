@@ -39,7 +39,7 @@ public class AccommodationTransformer {
                 .addressId(dto.getAddressId())
                 .personId(dto.getPersonId())
                 .accommodationDate(dto.getAccommodationDate())
-                .isSingleOwned(dto.isSingleOwned())
+                .isSingleOwned(dto.getIsSingleOwned())
                 .build();
     }
 

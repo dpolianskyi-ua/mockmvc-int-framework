@@ -15,4 +15,6 @@ public interface AccommodationRepository {
     Optional<Accommodation> update(Long id, Accommodation accommodation);
 
     void delete(Long id);
+
+    void deleteAll();
 }

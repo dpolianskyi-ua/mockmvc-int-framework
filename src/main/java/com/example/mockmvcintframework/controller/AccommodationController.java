@@ -61,4 +61,11 @@ public class AccommodationController {
 
         return new ResponseEntity<>(NO_CONTENT);
     }
+
+    @DeleteMapping
+    public ResponseEntity<AccommodationDTO> deleteAll() {
+        service.deleteAll();
+
+        return new ResponseEntity<>(NO_CONTENT);
+    }
 }

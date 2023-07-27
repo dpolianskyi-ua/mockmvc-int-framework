@@ -1,6 +1,6 @@
 package com.example.mockmvcintframework.controller;
 
-import com.example.mockmvcintframework.dto.GreetingMessage;
+import com.example.mockmvcintframework.dto.GreetingMessageRecord;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +17,7 @@ public class GreetingController {
     private final AtomicLong counter = new AtomicLong();
 
     @GetMapping
-    public GreetingMessage greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return new GreetingMessage(counter.incrementAndGet(), format(template, name));
+    public GreetingMessageRecord greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+        return new GreetingMessageRecord(counter.incrementAndGet(), format(template, name));
     }
 }

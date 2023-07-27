@@ -14,18 +14,11 @@ public class InMemoryAccommodationRepository implements AccommodationRepository 
 
     @Override
     public Optional<Accommodation> create(Accommodation entity) {
-        Accommodation entityToSave = Accommodation.builder()
-                .id(entities.size() + 1L)
-                .addressId(entity.getAddressId())
-                .personId(entity.getPersonId())
-                .accommodationDate(entity.getAccommodationDate())
-                .build();
+        Long id = entities.size() + 1L;
 
-        return Optional.of(entityToSave).map(createdAccommodation -> {
-            entities.put(createdAccommodation.getId(), createdAccommodation);
+        Optional.of(entity.withId(id)).ifPresent(e -> entities.put(e.getId(), e));
 
-            return createdAccommodation;
-        });
+        return Optional.of(entities.get(id));
     }
 
     @Override
@@ -40,16 +33,18 @@ public class InMemoryAccommodationRepository implements AccommodationRepository 
 
     @Override
     public Optional<Accommodation> update(Long id, Accommodation accommodation) {
-        return getById(id).map(foundAccommodation -> {
-            accommodation.setId(id);
-            entities.replace(id, accommodation);
+        getById(id).ifPresent(e -> entities.replace(id, accommodation.withId(id)));
 
-            return entities.get(id);
-        });
+        return Optional.of(entities.get(id));
     }
 
     @Override
     public void delete(Long id) {
         entities.remove(id);
+    }
+
+    @Override
+    public void deleteAll() {
+        entities.clear();
     }
 }
